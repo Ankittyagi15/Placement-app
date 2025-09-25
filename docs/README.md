@@ -22,6 +22,7 @@ Prerequisites: Node 18+, MongoDB running locally.
      npm run dev
      ```
    - API base: `http://localhost:5000/api`
+    - Note: If `MONGO_URI` is not set, the server will boot using an in-memory MongoDB. Data persists only for the lifetime of the process (handy for demos/deploys without Atlas).
 
 2. Frontend
    - See `frontend/README.md` for commands. Start with `npm install && npm run dev`.
