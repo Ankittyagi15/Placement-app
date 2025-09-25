@@ -6,6 +6,12 @@ export default function Mcq() {
   const [items, setItems] = useState([]);
   const [difficulty, setDifficulty] = useState('');
   const [tag, setTag] = useState('');
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [examMode, setExamMode] = useState(false);
+  const [examSize, setExamSize] = useState(5);
+  const [examQs, setExamQs] = useState([]);
+  const [answers, setAnswers] = useState({}); // qId -> index
+  const [score, setScore] = useState(null);
 
   async function load() {
     const params = new URLSearchParams({ kind: 'mcq' });
@@ -37,14 +43,53 @@ export default function Mcq() {
         <button onClick={load} className="bg-pink-600 text-white px-4 py-2 rounded">Apply</button>
         {user && <button onClick={submitSample} className="bg-fuchsia-600 text-white px-3 py-2 rounded">Submit Sample</button>}
       </div>
+      <div className="flex items-center gap-4 flex-wrap">
+        <label className="flex items-center gap-2 text-sm text-gray-700">
+          <input type="checkbox" checked={showAnswers} onChange={(e)=>setShowAnswers(e.target.checked)} />
+          Show correct answers
+        </label>
+        <div className="flex items-center gap-2 text-sm">
+          <span className="text-gray-700">Quick Exam:</span>
+          <input type="number" min="3" max="50" value={examSize} onChange={(e)=>setExamSize(Number(e.target.value)||5)} className="w-20 border px-2 py-1 rounded" />
+          {!examMode ? (
+            <button className="bg-emerald-600 text-white px-3 py-1 rounded" onClick={() => {
+              const shuffled = [...items].sort(()=>Math.random()-0.5).slice(0, examSize);
+              setExamQs(shuffled); setAnswers({}); setScore(null); setExamMode(true); setShowAnswers(false);
+            }}>Start</button>
+          ) : (
+            <button className="bg-gray-700 text-white px-3 py-1 rounded" onClick={() => { setExamMode(false); setExamQs([]); setScore(null); }}>Exit</button>
+          )}
+          {examMode && (
+            <button className="bg-blue-600 text-white px-3 py-1 rounded" onClick={() => {
+              let s = 0; examQs.forEach(q => { if (answers[q._id] === q.answerIndex) s++; });
+              setScore({ correct: s, total: examQs.length }); setShowAnswers(true);
+            }}>Submit</button>
+          )}
+          {score && <span className="text-sm font-medium text-emerald-700">Score: {score.correct} / {score.total}</span>}
+        </div>
+      </div>
       <div className="grid md:grid-cols-2 gap-4">
-        {items.map((q) => (
+        {(examMode ? examQs : items).map((q) => (
           <article key={q._id} className="bg-white p-4 rounded shadow border-l-4 border-pink-500">
             <h3 className="font-semibold">{q.title}</h3>
             <p className="text-xs text-gray-500">{q.difficulty} · {q.tags?.join(', ')}</p>
             <p className="text-sm mt-2">{q.question}</p>
             <ol className="list-decimal ml-6 text-sm mt-2 space-y-1">
-              {q.options?.map((opt, i) => <li key={i}>{opt}</li>)}
+              {q.options?.map((opt, i) => {
+                const isCorrect = showAnswers && typeof q.answerIndex === 'number' && i === q.answerIndex;
+                const chosen = answers[q._id] === i;
+                return (
+                  <li key={i} className={(isCorrect ? 'font-semibold text-green-700 ' : '') + (chosen && !isCorrect && showAnswers ? 'text-red-700 ' : '')}>
+                    <label className="flex items-center gap-2">
+                      {examMode ? (
+                        <input type="radio" name={`ans-${q._id}`} checked={chosen || false} onChange={() => setAnswers(a=>({ ...a, [q._id]: i }))} />
+                      ) : null}
+                      <span>{opt}</span>
+                      {isCorrect && <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Correct</span>}
+                    </label>
+                  </li>
+                );
+              })}
             </ol>
           </article>
         ))}

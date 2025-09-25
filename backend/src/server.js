@@ -13,6 +13,9 @@ import resourceRoutes from './routes/resources.js';
 import feedbackRoutes from './routes/feedback.js';
 import moderationRoutes from './routes/moderation.js';
 import questionRoutes from './routes/questions.js';
+import Resource from './models/Resource.js';
+import Feedback from './models/Feedback.js';
+import Question from './models/Question.js';
 
 const app = express();
 
@@ -59,6 +62,35 @@ async function start() {
     });
 
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+    // Auto-seed minimal sample data if collections are empty
+    try {
+      const [resCount, qCount, fbCount] = await Promise.all([
+        Resource.estimatedDocumentCount(),
+        Question.estimatedDocumentCount(),
+        Feedback.estimatedDocumentCount()
+      ]);
+      if (resCount === 0) {
+        await Resource.create([
+          { title: 'Top 50 Aptitude Questions', category: 'Aptitude', tags: ['quant','practice'], content: 'Hand-picked aptitude questions with solutions.', link: 'https://example.com/aptitude' },
+          { title: 'DSA Sheet (Topic-wise)', category: 'Coding', tags: ['arrays','dp','graphs'], content: 'Practice DSA by topics with explanations.', link: 'https://example.com/dsa' },
+          { title: 'Interview Etiquette & Tips', category: 'Interview', tags: ['hr','behavioral'], content: 'Crucial tips and common HR questions with sample answers.', link: 'https://example.com/interview' }
+        ]);
+      }
+      if (qCount === 0) {
+        await Question.create([
+          { kind: 'coding', title: 'Two Sum', source: 'LeetCode', difficulty: 'Easy', tags: ['array','hashmap'], description: 'Find indices of two numbers adding to target.', link: 'https://leetcode.com/problems/two-sum/', status: 'approved' },
+          { kind: 'coding', title: 'Detect Loop in Linked List', source: 'GFG', difficulty: 'Easy', tags: ['linked-list'], description: 'Detect if a cycle exists in a linked list.', link: 'https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/', status: 'approved' },
+          { kind: 'mcq', title: 'Probability: Two Heads', source: 'Custom', difficulty: 'Easy', tags: ['quant'], question: 'A fair coin is tossed twice. Probability of two heads?', options: ['1/2','1/3','1/4','3/4'], answerIndex: 2, status: 'approved' },
+          { kind: 'mcq', title: 'Analogy', source: 'Custom', difficulty: 'Medium', tags: ['verbal'], question: 'Puppy : Dog :: Kitten : ?', options: ['Cow','Cat','Lion','Goat'], answerIndex: 1, status: 'approved' }
+        ]);
+      }
+      if (fbCount === 0) {
+        await Feedback.create({ userName: 'Student', content: 'This site looks great and the content is helpful!', status: 'approved' });
+      }
+    } catch (seedErr) {
+      console.warn('Seeding skipped/failed:', seedErr.message);
+    }
   } catch (err) {
     console.error('Failed to start server', err);
     process.exit(1);
