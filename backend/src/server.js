@@ -1,4 +1,6 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import cors from 'cors';
@@ -42,6 +44,18 @@ async function start() {
     }
     await mongoose.connect(mongoUri);
     console.log('MongoDB connected');
+
+    // Serve frontend build if present
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const publicDir = path.resolve(__dirname, '../public');
+    app.use(express.static(publicDir));
+
+    // SPA fallback for non-API routes
+    app.get(/^(?!\/api\/).*/, (req, res) => {
+      res.sendFile(path.join(publicDir, 'index.html'));
+    });
+
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (err) {
     console.error('Failed to start server', err);
