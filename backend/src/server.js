@@ -12,6 +12,7 @@ import authRoutes from './routes/auth.js';
 import resourceRoutes from './routes/resources.js';
 import feedbackRoutes from './routes/feedback.js';
 import moderationRoutes from './routes/moderation.js';
+import questionRoutes from './routes/questions.js';
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/resources', resourceRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/moderation', moderationRoutes);
+app.use('/api/questions', questionRoutes);
 
 const PORT = process.env.PORT || 5000;
 

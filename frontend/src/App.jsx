@@ -7,15 +7,19 @@ import About from './pages/About.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import { AuthProvider, useAuth } from './auth/AuthContext.jsx';
+import Coding from './pages/Coding.jsx';
+import Mcq from './pages/Mcq.jsx';
 
 function NavBar() {
   const { user, logout } = useAuth();
   return (
-    <nav className="bg-white shadow sticky top-0 z-10">
+    <nav className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white sticky top-0 z-10">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="font-semibold">Placement Prep</Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 text-white/90">
           <Link to="/resources" className="hover:underline">Resources</Link>
+          <Link to="/coding" className="hover:underline">Coding</Link>
+          <Link to="/mcq" className="hover:underline">MCQ Bank</Link>
           <Link to="/feedback" className="hover:underline">Feedback</Link>
           <Link to="/about" className="hover:underline">About</Link>
           {user?.role === 'admin' && <Link to="/moderation" className="hover:underline">Moderation</Link>}
@@ -26,7 +30,7 @@ function NavBar() {
             </>
           )}
           {user && (
-            <button onClick={logout} className="text-sm bg-gray-800 text-white px-3 py-1 rounded">Logout</button>
+            <button onClick={logout} className="text-sm bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded">Logout</button>
           )}
         </div>
       </div>
@@ -56,6 +60,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/coding" element={<Coding />} />
+            <Route path="/mcq" element={<Mcq />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/moderation" element={<ProtectedRoute admin><Moderation /></ProtectedRoute>} />
             <Route path="/about" element={<About />} />
