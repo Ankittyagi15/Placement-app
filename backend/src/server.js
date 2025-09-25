@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
@@ -26,17 +27,24 @@ app.use('/api/feedback', feedbackRoutes);
 app.use('/api/moderation', moderationRoutes);
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/placement_prep';
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
+async function start() {
+  try {
+    let mongoUri = process.env.MONGO_URI;
+    if (!mongoUri) {
+      console.log('MONGO_URI not set. Starting in-memory MongoDB (data will reset on restart).');
+      const mem = await MongoMemoryServer.create();
+      mongoUri = mem.getUri();
+    }
+    await mongoose.connect(mongoUri);
     console.log('MongoDB connected');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => {
-    console.error('Failed to connect to MongoDB', err);
+  } catch (err) {
+    console.error('Failed to start server', err);
     process.exit(1);
-  });
+  }
+}
+
+start();
 
 
