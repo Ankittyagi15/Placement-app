@@ -1,0 +1,13 @@
+{
+  "name": "placement-prep-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo wrapper to run backend on Render root service",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "postinstall": "cd backend && npm install",
+    "start": "node backend/src/server.js",
+    "dev": "node backend/src/server.js"
+  }
+}
+
