@@ -78,11 +78,11 @@ async function start() {
         ]);
       }
       if (qCount === 0) {
+        const { mcqDataset } = await import('./seed/mcq-dataset.js');
         await Question.create([
           { kind: 'coding', title: 'Two Sum', source: 'LeetCode', difficulty: 'Easy', tags: ['array','hashmap'], description: 'Find indices of two numbers adding to target.', link: 'https://leetcode.com/problems/two-sum/', status: 'approved' },
           { kind: 'coding', title: 'Detect Loop in Linked List', source: 'GFG', difficulty: 'Easy', tags: ['linked-list'], description: 'Detect if a cycle exists in a linked list.', link: 'https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/', status: 'approved' },
-          { kind: 'mcq', title: 'Probability: Two Heads', source: 'Custom', difficulty: 'Easy', tags: ['quant'], question: 'A fair coin is tossed twice. Probability of two heads?', options: ['1/2','1/3','1/4','3/4'], answerIndex: 2, status: 'approved' },
-          { kind: 'mcq', title: 'Analogy', source: 'Custom', difficulty: 'Medium', tags: ['verbal'], question: 'Puppy : Dog :: Kitten : ?', options: ['Cow','Cat','Lion','Goat'], answerIndex: 1, status: 'approved' }
+          ...mcqDataset
         ]);
       }
       if (fbCount === 0) {

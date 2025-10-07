@@ -5,6 +5,7 @@ import User from '../models/User.js';
 import Resource from '../models/Resource.js';
 import Feedback from '../models/Feedback.js';
 import Question from '../models/Question.js';
+import { mcqDataset } from './mcq-dataset.js';
 
 dotenv.config();
 
@@ -64,7 +65,8 @@ async function run() {
     { kind: 'coding', title: 'Two Sum', source: 'LeetCode', difficulty: 'Easy', tags: ['array','hashmap'], description: 'Given an array of integers, return indices of the two numbers such that they add up to target.', link: 'https://leetcode.com/problems/two-sum/', status: 'approved' },
     { kind: 'coding', title: 'Detect Cycle in Linked List', source: 'GFG', difficulty: 'Easy', tags: ['linked-list'], description: 'Check if a linked list has a cycle.', link: 'https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/', status: 'approved' },
     { kind: 'mcq', title: 'Probability Basics', source: 'Custom', difficulty: 'Easy', tags: ['quant'], question: 'A fair coin is tossed twice. What is the probability of two heads?', options: ['1/2','1/3','1/4','3/4'], answerIndex: 2, status: 'approved' },
-    { kind: 'mcq', title: 'Verbal Analogy', source: 'Custom', difficulty: 'Medium', tags: ['verbal'], question: 'Puppy : Dog :: Kitten : ?', options: ['Cow','Cat','Lion','Goat'], answerIndex: 1, status: 'approved' }
+    { kind: 'mcq', title: 'Verbal Analogy', source: 'Custom', difficulty: 'Medium', tags: ['verbal'], question: 'Puppy : Dog :: Kitten : ?', options: ['Cow','Cat','Lion','Goat'], answerIndex: 1, status: 'approved' },
+    ...mcqDataset
   ]);
 
   console.log('Seed complete');
