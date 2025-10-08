@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
@@ -57,6 +58,13 @@ async function start() {
     }
     await mongoose.connect(mongoUri);
     console.log('MongoDB connected');
+
+    // Ensure ML models directory exists
+    const modelsDir = path.join(process.cwd(), 'services', 'ml', 'models');
+    if (!fs.existsSync(modelsDir)) {
+      fs.mkdirSync(modelsDir, { recursive: true });
+      console.log('Created ML models directory for deployment');
+    }
 
     // Initialize ML models
     await initializeMLModels();

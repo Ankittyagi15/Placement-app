@@ -1,13 +1,30 @@
 import * as tf from '@tensorflow/tfjs-node';
 import path from 'path';
+import fs from 'fs';
 
 // Placement Prediction Model using TensorFlow.js
 class PlacementPredictor {
   constructor() {
     this.model = null;
     this.isTrained = false;
-    // Use relative path for backend deployment
-    this.modelPath = path.join(process.cwd(), 'src', 'services', 'ml', 'models', 'placement_model');
+    // Use relative path that works in both development and deployment
+    this.modelPath = path.join(process.cwd(), 'services', 'ml', 'models', 'placement_model');
+
+    // Ensure models directory exists
+    this.ensureModelDirectory();
+  }
+
+  // Ensure the models directory exists
+  ensureModelDirectory() {
+    const modelsDir = path.dirname(this.modelPath);
+    if (!fs.existsSync(modelsDir)) {
+      try {
+        fs.mkdirSync(modelsDir, { recursive: true });
+        console.log('Created ML models directory:', modelsDir);
+      } catch (error) {
+        console.error('Failed to create ML models directory:', error.message);
+      }
+    }
   }
 
   // Create model architecture
@@ -108,9 +125,14 @@ class PlacementPredictor {
     this.isTrained = true;
     console.log('Placement prediction model trained successfully');
 
-    // Save the model
-    await this.model.save(`file://${this.modelPath}`);
-    console.log('Model saved to', this.modelPath);
+    // Try to save the model (may fail in deployment environments)
+    try {
+      await this.model.save(`file://${this.modelPath}`);
+      console.log('Model saved to', this.modelPath);
+    } catch (error) {
+      console.log('Could not save model to disk (normal in deployment):', error.message);
+      console.log('Model will work for predictions but won\'t persist between restarts');
+    }
   }
 
   // Load pre-trained model
@@ -119,11 +141,11 @@ class PlacementPredictor {
       this.model = await tf.loadLayersModel(`file://${this.modelPath}/model.json`);
       this.isTrained = true;
       console.log('Pre-trained placement prediction model loaded');
+      return true;
     } catch (error) {
-      console.log('No pre-trained model found, need to train first');
+      console.log('No pre-trained model found (normal in deployment), will train new model');
       return false;
     }
-    return true;
   }
 
   // Predict placement probability

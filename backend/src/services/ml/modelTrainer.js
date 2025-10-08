@@ -21,6 +21,7 @@ export async function initializeMLModels() {
   } catch (error) {
     console.error('❌ Failed to initialize ML models:', error.message);
     console.log('Models will use fallback rule-based approaches');
+    console.log('This is normal in deployment environments where file system access is limited.');
     return false;
   }
 }

@@ -1,5 +1,6 @@
 import * as tf from '@tensorflow/tfjs-node';
 import path from 'path';
+import fs from 'fs';
 import Question from '../../models/Question.js';
 
 // Question Recommendation System using collaborative filtering and content-based approaches
@@ -9,7 +10,23 @@ class QuestionRecommender {
     this.userModel = null;
     this.isTrained = false;
     this.questions = [];
-    this.modelPath = path.join(process.cwd(), 'src', 'services', 'ml', 'models', 'question_recommender');
+    this.modelPath = path.join(process.cwd(), 'services', 'ml', 'models', 'question_recommender');
+
+    // Ensure models directory exists
+    this.ensureModelDirectory();
+  }
+
+  // Ensure the models directory exists
+  ensureModelDirectory() {
+    const modelsDir = path.dirname(this.modelPath);
+    if (!fs.existsSync(modelsDir)) {
+      try {
+        fs.mkdirSync(modelsDir, { recursive: true });
+        console.log('Created ML models directory:', modelsDir);
+      } catch (error) {
+        console.error('Failed to create ML models directory:', error.message);
+      }
+    }
   }
 
   // Create recommendation model
@@ -203,10 +220,21 @@ class QuestionRecommender {
     this.isTrained = true;
     console.log('Question recommendation models trained successfully');
 
-    // Save models
-    await this.questionModel.save(`file://${this.modelPath}_questions`);
+    // Try to save models (may fail in deployment environments)
+    try {
+      await this.questionModel.save(`file://${this.modelPath}_questions`);
+      console.log('Question model saved to', `${this.modelPath}_questions`);
+    } catch (error) {
+      console.log('Could not save question model to disk (normal in deployment):', error.message);
+    }
+
     if (this.userModel) {
-      await this.userModel.save(`file://${this.modelPath}_users`);
+      try {
+        await this.userModel.save(`file://${this.modelPath}_users`);
+        console.log('User model saved to', `${this.modelPath}_users`);
+      } catch (error) {
+        console.log('Could not save user model to disk (normal in deployment):', error.message);
+      }
     }
   }
 
@@ -386,16 +414,20 @@ class QuestionRecommender {
   async loadModels() {
     try {
       this.questionModel = await tf.loadLayersModel(`file://${this.modelPath}_questions/model.json`);
+      console.log('Question model loaded from disk');
       try {
         this.userModel = await tf.loadLayersModel(`file://${this.modelPath}_users/model.json`);
+        console.log('User model loaded from disk');
       } catch (e) {
         console.log('User model not found, using rule-based approach');
       }
       this.isTrained = true;
       console.log('Question recommendation models loaded');
+      return true;
     } catch (error) {
-      console.log('No pre-trained models found, using rule-based recommendation');
+      console.log('No pre-trained models found (normal in deployment), using rule-based recommendation');
       this.isTrained = false;
+      return false;
     }
   }
 
