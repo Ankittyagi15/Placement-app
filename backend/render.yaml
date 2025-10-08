@@ -1,10 +1,10 @@
 services:
-  # Single service serving API + built frontend
+  # Backend-only deployment
   - type: web
-    name: placement-prep
+    name: placement-prep-backend
     env: node
     plan: free
-    buildCommand: npm run postinstall
+    buildCommand: npm install
     startCommand: npm start
     autoDeploy: true
     healthCheckPath: /api/health
@@ -15,5 +15,3 @@ services:
         generateValue: false
       - key: JWT_SECRET
         generateValue: true
-
-

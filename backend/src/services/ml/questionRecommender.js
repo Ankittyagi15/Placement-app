@@ -9,7 +9,7 @@ class QuestionRecommender {
     this.userModel = null;
     this.isTrained = false;
     this.questions = [];
-    this.modelPath = path.join(process.cwd(), 'models', 'question_recommender');
+    this.modelPath = path.join(process.cwd(), 'src', 'services', 'ml', 'models', 'question_recommender');
   }
 
   // Create recommendation model
