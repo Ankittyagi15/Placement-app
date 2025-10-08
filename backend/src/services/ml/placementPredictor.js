@@ -7,7 +7,7 @@ class PlacementPredictor {
     this.model = null;
     this.isTrained = false;
     // Use relative path for backend deployment
-    this.modelPath = path.join(process.cwd(), 'services', 'ml', 'models', 'placement_model');
+    this.modelPath = path.join(process.cwd(), 'src', 'services', 'ml', 'models', 'placement_model');
   }
 
   // Create model architecture
