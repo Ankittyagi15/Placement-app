@@ -40,6 +40,11 @@ app.use('/api/moderation', moderationRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/ml', mlRoutes);
 
+// API routes that don't match should return 404 JSON, not HTML
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ message: 'API endpoint not found' });
+});
+
 const PORT = process.env.PORT || 5000;
 
 async function start() {
@@ -62,10 +67,32 @@ async function start() {
     const publicDir = path.resolve(__dirname, 'public');
     app.use(express.static(publicDir));
 
-    // SPA fallback for non-API routes
-    app.get(/^(?!\/api\/).*/, (req, res) => {
-      res.sendFile(path.join(publicDir, 'index.html'));
+// Handle all remaining routes - API routes should return JSON 404
+app.use('*', (req, res) => {
+  // For API routes that don't match any handlers, return JSON 404
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({
+      message: 'API endpoint not found',
+      path: req.path,
+      method: req.method,
+      availableEndpoints: [
+        'GET /api/health',
+        'POST /api/auth/login',
+        'POST /api/auth/signup',
+        'GET /api/questions',
+        'POST /api/questions',
+        'GET /api/resources',
+        'POST /api/resources',
+        'POST /api/feedback',
+        'GET /api/ml/models/status',
+        'POST /api/ml/predict-placement',
+        'POST /api/ml/recommend-questions'
+      ]
     });
+  }
+  // For frontend routes, serve the SPA
+  res.sendFile(path.join(publicDir, 'index.html'));
+});
 
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
