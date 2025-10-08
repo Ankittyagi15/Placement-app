@@ -6,6 +6,7 @@ import Moderation from './pages/Moderation.jsx';
 import About from './pages/About.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
+import PlacementDashboard from './pages/PlacementDashboard.jsx';
 import { AuthProvider, useAuth } from './auth/AuthContext.jsx';
 import Coding from './pages/Coding.jsx';
 import Mcq from './pages/Mcq.jsx';
@@ -20,6 +21,7 @@ function NavBar() {
           <Link to="/resources" className="hover:underline">Resources</Link>
           <Link to="/coding" className="hover:underline">Coding</Link>
           <Link to="/mcq" className="hover:underline">MCQ Bank</Link>
+          {user && <Link to="/dashboard" className="hover:underline">AI Dashboard</Link>}
           <Link to="/feedback" className="hover:underline">Feedback</Link>
           <Link to="/about" className="hover:underline">About</Link>
           {user?.role === 'admin' && <Link to="/moderation" className="hover:underline">Moderation</Link>}
@@ -62,6 +64,7 @@ export default function App() {
             <Route path="/resources" element={<Resources />} />
             <Route path="/coding" element={<Coding />} />
             <Route path="/mcq" element={<Mcq />} />
+            <Route path="/dashboard" element={<ProtectedRoute><PlacementDashboard /></ProtectedRoute>} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/moderation" element={<ProtectedRoute admin><Moderation /></ProtectedRoute>} />
             <Route path="/about" element={<About />} />

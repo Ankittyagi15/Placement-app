@@ -13,6 +13,8 @@ import resourceRoutes from './routes/resources.js';
 import feedbackRoutes from './routes/feedback.js';
 import moderationRoutes from './routes/moderation.js';
 import questionRoutes from './routes/questions.js';
+import mlRoutes from './routes/ml.js';
+import { initializeMLModels } from './services/ml/modelTrainer.js';
 import Resource from './models/Resource.js';
 import Feedback from './models/Feedback.js';
 import Question from './models/Question.js';
@@ -36,6 +38,7 @@ app.use('/api/resources', resourceRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/moderation', moderationRoutes);
 app.use('/api/questions', questionRoutes);
+app.use('/api/ml', mlRoutes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -49,6 +52,9 @@ async function start() {
     }
     await mongoose.connect(mongoUri);
     console.log('MongoDB connected');
+
+    // Initialize ML models
+    await initializeMLModels();
 
     // Serve frontend build if present
     const __filename = fileURLToPath(import.meta.url);
