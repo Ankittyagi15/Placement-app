@@ -40,7 +40,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/resources" element={<ProtectedRoute><Resources /></ProtectedRoute>} />
               <Route path="/coding" element={<ProtectedRoute><Coding /></ProtectedRoute>} />
-              <Route path="/mcq" element={<ProtectedRoute><Mcq /></ProtectedRoute>} />
+              <Route path="/mcq" element={<Mcq />} />
               <Route path="/dashboard" element={<ProtectedRoute><PlacementDashboard /></ProtectedRoute>} />
               <Route path="/feedback" element={<ProtectedRoute><Feedback /></ProtectedRoute>} />
               <Route path="/moderation" element={<ProtectedRoute admin><Moderation /></ProtectedRoute>} />

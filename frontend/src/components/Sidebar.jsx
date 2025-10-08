@@ -12,11 +12,11 @@ export default function Sidebar() {
     ...(user ? [
       { name: 'Dashboard', href: '/dashboard', icon: '📊', current: location.pathname === '/dashboard' },
       { name: 'Coding', href: '/coding', icon: '💻', current: location.pathname === '/coding' },
-      { name: 'MCQ Bank', href: '/mcq', icon: '📝', current: location.pathname === '/mcq' },
       { name: 'Resources', href: '/resources', icon: '📚', current: location.pathname === '/resources' },
       { name: 'Feedback', href: '/feedback', icon: '💬', current: location.pathname === '/feedback' },
       ...(user.role === 'admin' ? [{ name: 'Moderation', href: '/moderation', icon: '⚙️', current: location.pathname === '/moderation' }] : [])
     ] : [
+      { name: 'MCQ Bank', href: '/mcq', icon: '📝', current: location.pathname === '/mcq' },
       { name: 'About', href: '/about', icon: 'ℹ️', current: location.pathname === '/about' }
     ])
   ];
