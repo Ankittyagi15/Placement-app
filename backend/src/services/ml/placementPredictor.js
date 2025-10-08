@@ -1,11 +1,13 @@
 import * as tf from '@tensorflow/tfjs-node';
+import path from 'path';
 
 // Placement Prediction Model using TensorFlow.js
 class PlacementPredictor {
   constructor() {
     this.model = null;
     this.isTrained = false;
-    this.modelPath = './backend/src/services/ml/models/placement_model';
+    // Use absolute path for deployment compatibility
+    this.modelPath = path.join(process.cwd(), 'models', 'placement_model');
   }
 
   // Create model architecture

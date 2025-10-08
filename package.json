@@ -3,11 +3,12 @@
   "private": true,
   "version": "1.0.0",
   "description": "Monorepo wrapper to run backend on Render root service",
+  "main": "server.js",
   "engines": { "node": ">=18" },
   "scripts": {
     "postinstall": "cd backend && npm install && cd ../frontend && npm install && npm run build && cd .. && rm -rf backend/public && mkdir -p backend/public && cp -R frontend/dist/* backend/public/",
-    "start": "node backend/src/server.js",
-    "dev": "node backend/src/server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   }
 }
 

@@ -1,4 +1,5 @@
 import * as tf from '@tensorflow/tfjs-node';
+import path from 'path';
 import Question from '../../models/Question.js';
 
 // Question Recommendation System using collaborative filtering and content-based approaches
@@ -8,7 +9,7 @@ class QuestionRecommender {
     this.userModel = null;
     this.isTrained = false;
     this.questions = [];
-    this.modelPath = './backend/src/services/ml/models/question_recommender';
+    this.modelPath = path.join(process.cwd(), 'models', 'question_recommender');
   }
 
   // Create recommendation model
