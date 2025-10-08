@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../auth/AuthContext.jsx';
 
 export default function Home() {
-  const { user } = useAuth();
 
   return (
     <div className="min-h-screen">
@@ -15,66 +13,25 @@ export default function Home() {
           <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{animationDelay: '4s'}}></div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-4xl mx-auto text-center">
           <div className="animate-fadeInUp">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 rounded-full mb-8 backdrop-blur-sm">
-              <span className="text-4xl">🚀</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Welcome to{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300 drop-shadow-lg">
-                Placement Prep
-              </span>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
+              Ready to begin your path to success?
             </h1>
-            <p className="text-xl md:text-2xl mb-12 text-gray-100 leading-relaxed max-w-3xl mx-auto">
-              Your ultimate destination for mastering placement interviews with AI-powered insights, curated resources, and personalized practice sessions
+            <p className="text-lg md:text-xl mb-12 text-gray-100 leading-relaxed max-w-2xl mx-auto">
+              Master your placement journey with curated resources, practice questions, and expert guidance
             </p>
           </div>
 
-          {!user ? (
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fadeInUp" style={{animationDelay: '0.3s'}}>
-              <Link
-                to="/login"
-                className="group relative px-8 py-4 bg-white text-indigo-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative flex items-center justify-center">
-                  <span className="mr-2">🔑</span>
-                  Login to Start Journey
-                </span>
-              </Link>
-              <Link
-                to="/signup"
-                className="group relative px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-indigo-600 transform hover:scale-105 transition-all duration-300"
-              >
-                <span className="flex items-center justify-center">
-                  <span className="mr-2">✨</span>
-                  Join for Free
-                </span>
-              </Link>
-            </div>
-          ) : (
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fadeInUp" style={{animationDelay: '0.3s'}}>
-              <Link
-                to="/dashboard"
-                className="group relative px-8 py-4 bg-white text-indigo-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              >
-                <span className="flex items-center justify-center">
-                  <span className="mr-2">📊</span>
-                  View Dashboard
-                </span>
-              </Link>
-              <Link
-                to="/coding"
-                className="group relative px-8 py-4 bg-indigo-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              >
-                <span className="flex items-center justify-center">
-                  <span className="mr-2">💻</span>
-                  Start Coding
-                </span>
-              </Link>
-            </div>
-          )}
+          <div className="animate-fadeInUp" style={{animationDelay: '0.3s'}}>
+            <Link
+              to="/mcq"
+              className="inline-flex items-center justify-center px-12 py-6 text-xl font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-2xl hover:shadow-white/25 transform hover:scale-105 transition-all duration-300 hover:from-indigo-700 hover:to-purple-700"
+            >
+              <span className="mr-3 text-2xl">🚀</span>
+              Get Started
+            </Link>
+          </div>
         </div>
         
         {/* Floating elements for visual appeal */}
@@ -92,12 +49,12 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
                 Placement Success
               </span>
-            </h2>
+          </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Comprehensive platform designed to accelerate your journey from preparation to placement
             </p>
           </div>
-
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Feature Cards */}
             <div className="group relative bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
@@ -166,7 +123,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <div className="text-4xl font-bold text-indigo-600 mb-2">500+</div>
+              <div className="text-4xl font-bold text-indigo-600 mb-2">500+</div>
                 <div className="text-gray-700 font-medium">Practice Questions</div>
                 <p className="text-sm text-gray-500 mt-2">Curated MCQs across all topics</p>
               </div>
@@ -226,52 +183,25 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            {!user ? (
-              <>
-                <Link
-                  to="/login"
-                  className="group relative px-10 py-5 bg-white text-indigo-600 font-bold rounded-2xl shadow-2xl hover:shadow-white/25 transform hover:scale-105 transition-all duration-300 overflow-hidden text-lg"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center justify-center">
-                    <span className="mr-3">🔑</span>
-                    Login to Start Journey
-                  </span>
-                </Link>
+            <Link
+              to="/mcq"
+              className="group relative px-10 py-5 bg-white text-indigo-600 font-bold rounded-2xl shadow-2xl hover:shadow-white/25 transform hover:scale-105 transition-all duration-300 text-lg"
+            >
+              <span className="flex items-center justify-center">
+                <span className="mr-3">📝</span>
+                Start MCQ Practice
+              </span>
+            </Link>
 
-                <Link
-                  to="/signup"
-                  className="group relative px-10 py-5 border-3 border-white text-white font-bold rounded-2xl hover:bg-white hover:text-indigo-600 transform hover:scale-105 transition-all duration-300 text-lg backdrop-blur-sm"
-                >
-                  <span className="flex items-center justify-center">
-                    <span className="mr-3">✨</span>
-                    Join for Free
-                  </span>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/dashboard"
-                  className="group relative px-10 py-5 bg-white text-indigo-600 font-bold rounded-2xl shadow-2xl hover:shadow-white/25 transform hover:scale-105 transition-all duration-300 text-lg"
-                >
-                  <span className="flex items-center justify-center">
-                    <span className="mr-3">📊</span>
-                    View Your Dashboard
-                  </span>
-                </Link>
-
-                <Link
-                  to="/resources"
-                  className="group relative px-10 py-5 bg-indigo-500 text-white font-bold rounded-2xl shadow-2xl hover:bg-indigo-400 transform hover:scale-105 transition-all duration-300 text-lg"
-                >
-                  <span className="flex items-center justify-center">
-                    <span className="mr-3">📚</span>
-                    Explore Resources
-                  </span>
-                </Link>
-              </>
-            )}
+            <Link
+              to="/coding"
+              className="group relative px-10 py-5 bg-indigo-500 text-white font-bold rounded-2xl shadow-2xl hover:bg-indigo-400 transform hover:scale-105 transition-all duration-300 text-lg"
+            >
+              <span className="flex items-center justify-center">
+                <span className="mr-3">💻</span>
+                Explore All Features
+              </span>
+            </Link>
           </div>
 
           <div className="mt-12 text-center">
