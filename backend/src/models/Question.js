@@ -19,7 +19,7 @@ const questionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-questionSchema.index({ title: 'text', tags: 1, difficulty: 1 });
+questionSchema.index({ title: 'text', difficulty: 1 });
 
 export default mongoose.model('Question', questionSchema);
 

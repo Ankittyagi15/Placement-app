@@ -12,7 +12,7 @@ const resourceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-resourceSchema.index({ title: 'text', content: 'text', tags: 1, category: 1 });
+resourceSchema.index({ title: 'text', content: 'text', category: 1 });
 
 export default mongoose.model('Resource', resourceSchema);
 

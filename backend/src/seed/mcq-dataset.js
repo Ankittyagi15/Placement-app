@@ -1,5 +1,191 @@
 export const mcqDataset = [
-  // Quantitative Aptitude
+  // Technical Skills - Core Programming Concepts
+  {
+    kind: 'mcq',
+    title: 'Time Complexity Analysis',
+    difficulty: 'Medium',
+    tags: ['technical', 'algorithms', 'dsa'],
+    question: 'What is the time complexity of binary search algorithm?',
+    options: ['O(n)', 'O(log n)', 'O(n²)', 'O(1)'],
+    answerIndex: 1,
+    explanation: 'Binary search divides the search space in half each time, resulting in O(log n) time complexity.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Data Structures - Stack vs Queue',
+    difficulty: 'Easy',
+    tags: ['technical', 'dsa'],
+    question: 'Which data structure follows LIFO (Last In, First Out) principle?',
+    options: ['Queue', 'Stack', 'Array', 'Linked List'],
+    answerIndex: 1,
+    explanation: 'Stack follows LIFO principle where the last element added is the first to be removed.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'OOP Concepts - Inheritance',
+    difficulty: 'Medium',
+    tags: ['technical', 'oop'],
+    question: 'In object-oriented programming, what allows a class to inherit properties from another class?',
+    options: ['Polymorphism', 'Encapsulation', 'Inheritance', 'Abstraction'],
+    answerIndex: 2,
+    explanation: 'Inheritance allows a class to inherit properties and methods from a parent class.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Database - SQL Joins',
+    difficulty: 'Medium',
+    tags: ['technical', 'database'],
+    question: 'Which SQL JOIN returns all records from the left table and matching records from the right table?',
+    options: ['INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'FULL OUTER JOIN'],
+    answerIndex: 1,
+    explanation: 'LEFT JOIN returns all records from the left table and the matched records from the right table.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'System Design - Scalability',
+    difficulty: 'Hard',
+    tags: ['technical', 'system-design'],
+    question: 'Which of the following is NOT a common technique for improving system scalability?',
+    options: ['Load Balancing', 'Database Sharding', 'Caching', 'Single Point of Failure'],
+    answerIndex: 3,
+    explanation: 'Single Point of Failure reduces scalability, while the others improve it.',
+    status: 'approved'
+  },
+
+  // Aptitude & Logical Reasoning
+  {
+    kind: 'mcq',
+    title: 'Logical Reasoning - Pattern Recognition',
+    difficulty: 'Medium',
+    tags: ['logical', 'pattern'],
+    question: 'Find the next number in the series: 2, 6, 12, 20, 30, ?',
+    options: ['42', '40', '44', '46'],
+    answerIndex: 0,
+    explanation: 'The pattern is +4, +6, +8, +10, +12. So 30 + 12 = 42.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Critical Thinking - Problem Solving',
+    difficulty: 'Medium',
+    tags: ['logical', 'critical-thinking'],
+    question: 'If all roses are flowers and some flowers fade quickly, which statement must be true?',
+    options: ['All roses fade quickly', 'Some roses fade quickly', 'No roses fade quickly', 'Cannot be determined'],
+    answerIndex: 3,
+    explanation: 'The information given does not specify the relationship between roses and fading.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Data Interpretation',
+    difficulty: 'Medium',
+    tags: ['aptitude', 'data-interpretation'],
+    question: 'A company\'s profit increased by 20% in 2023 and decreased by 10% in 2024. What is the net change in profit?',
+    options: ['+8%', '+10%', '-8%', 'No change'],
+    answerIndex: 0,
+    explanation: '20% increase followed by 10% decrease: (1.20 × 0.90) - 1 = 1.08 - 1 = 8% increase.',
+    status: 'approved'
+  },
+
+  // Communication & Verbal Ability
+  {
+    kind: 'mcq',
+    title: 'Grammar - Subject-Verb Agreement',
+    difficulty: 'Easy',
+    tags: ['verbal', 'grammar'],
+    question: 'Which sentence has correct subject-verb agreement?',
+    options: ['The team are winning', 'The team is winning', 'The team were winning', 'The team be winning'],
+    answerIndex: 1,
+    explanation: 'Collective nouns like "team" take singular verbs in American English.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Reading Comprehension',
+    difficulty: 'Medium',
+    tags: ['verbal', 'comprehension'],
+    question: 'Read the passage: "Technology has revolutionized communication." What is the main idea?',
+    options: ['Technology is expensive', 'Communication has improved', 'Technology is unreliable', 'People communicate less'],
+    answerIndex: 1,
+    explanation: 'The passage emphasizes how technology has improved communication.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Vocabulary - Synonyms',
+    difficulty: 'Easy',
+    tags: ['verbal', 'vocabulary'],
+    question: 'What is the synonym of "METICULOUS"?',
+    options: ['Careless', 'Thorough', 'Quick', 'Rough'],
+    answerIndex: 1,
+    explanation: 'Meticulous means showing great attention to detail; thorough.',
+    status: 'approved'
+  },
+
+  // Project Management & Soft Skills
+  {
+    kind: 'mcq',
+    title: 'Agile Methodology',
+    difficulty: 'Medium',
+    tags: ['projects', 'agile'],
+    question: 'In Agile development, what is the primary purpose of a Sprint Retrospective?',
+    options: ['Plan next sprint', 'Review completed work', 'Improve team processes', 'Assign tasks'],
+    answerIndex: 2,
+    explanation: 'Sprint Retrospective focuses on inspecting and adapting the team\'s processes.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Team Communication',
+    difficulty: 'Easy',
+    tags: ['projects', 'communication'],
+    question: 'Which communication style is most effective for resolving team conflicts?',
+    options: ['Aggressive', 'Passive', 'Assertive', 'Passive-Aggressive'],
+    answerIndex: 2,
+    explanation: 'Assertive communication expresses needs clearly while respecting others.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Project Planning',
+    difficulty: 'Medium',
+    tags: ['projects', 'planning'],
+    question: 'What is the critical path in project management?',
+    options: ['Shortest path', 'Longest path', 'Most expensive path', 'Least risky path'],
+    answerIndex: 1,
+    explanation: 'Critical path is the longest sequence of activities that determines project duration.',
+    status: 'approved'
+  },
+
+  // Academic Performance Indicators
+  {
+    kind: 'mcq',
+    title: 'Academic Planning',
+    difficulty: 'Easy',
+    tags: ['academic', 'planning'],
+    question: 'Which factor is most important for maintaining a high CGPA?',
+    options: ['Regular attendance', 'Consistent study habits', 'Group study', 'Extra-curricular activities'],
+    answerIndex: 1,
+    explanation: 'Consistent study habits are fundamental to academic success.',
+    status: 'approved'
+  },
+  {
+    kind: 'mcq',
+    title: 'Time Management',
+    difficulty: 'Medium',
+    tags: ['academic', 'time-management'],
+    question: 'What is the most effective way to manage study time for multiple subjects?',
+    options: ['Study one subject all day', 'Use Pomodoro technique', 'Study only before exams', 'Multitask between subjects'],
+    answerIndex: 1,
+    explanation: 'Pomodoro technique (25-minute focused sessions) improves concentration and retention.',
+    status: 'approved'
+  },
+
+  // Quantitative Aptitude (existing questions)
   {
     kind: 'mcq',
     title: 'Percentage Calculation',
@@ -56,7 +242,7 @@ export const mcqDataset = [
     status: 'approved'
   },
 
-  // Logical Reasoning
+  // Logical Reasoning (existing questions)
   {
     kind: 'mcq',
     title: 'Coding-Decoding',
@@ -102,7 +288,7 @@ export const mcqDataset = [
     status: 'approved'
   },
 
-  // Verbal Ability
+  // Verbal Ability (existing questions)
   {
     kind: 'mcq',
     title: 'Synonyms',
@@ -137,7 +323,7 @@ export const mcqDataset = [
     status: 'approved'
   },
 
-  // Technical - Programming
+  // Technical - Programming (existing questions)
   {
     kind: 'mcq',
     title: 'Data Structures',
