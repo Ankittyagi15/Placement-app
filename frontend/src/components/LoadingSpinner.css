@@ -1,0 +1,13 @@
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+.spinner-container p {
+  color: var(--text-light);
+  font-weight: 500;
+}
