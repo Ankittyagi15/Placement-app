@@ -34,5 +34,5 @@ RUN chmod +x /app/start.sh
 
 EXPOSE 8080 3000
 
-# Start both services
-ENTRYPOINT ["/app/start.sh"]
+# Start both services with sh instead of bash (Alpine compatible)
+ENTRYPOINT ["/bin/sh", "/app/start.sh"]
