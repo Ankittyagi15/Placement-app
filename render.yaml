@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: placement-backend
+    env: docker
+    branch: main
+    dockerfilePath: backend/Dockerfile
+    region: oregon
+    plan: free
+
+  - type: static
+    name: placement-frontend
+    env: static
+    branch: main
+    buildCommand: "cd frontend && npm ci && npm run build"
+    publishPath: frontend/dist
+    region: oregon
+    plan: free

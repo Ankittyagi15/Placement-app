@@ -16,8 +16,8 @@ RUN npm install && npm run build
 FROM node:21-alpine AS runtime
 WORKDIR /app
 
-# Install Java runtime for backend
-RUN apk add --no-cache openjdk21-jre
+# Install Java runtime for backend and curl for health checks
+RUN apk add --no-cache openjdk21-jre curl
 
 # Copy built JAR
 COPY --from=backend-builder /app/backend/target/placement-prep-portal-1.0.0.jar app.jar
