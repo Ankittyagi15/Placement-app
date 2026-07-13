@@ -13,14 +13,17 @@ WORKDIR /app/frontend
 RUN npm install && npm run build
 
 # Runtime stage
-FROM eclipse-temurin:21-jre-jammy
+FROM node:21-alpine AS runtime
 WORKDIR /app
+
+# Install Java runtime for backend
+RUN apk add --no-cache openjdk21-jre
 
 # Copy built JAR
 COPY --from=backend-builder /app/backend/target/placement-prep-portal-1.0.0.jar app.jar
 
-# Install Node and serve for frontend
-RUN apt-get update && apt-get install -y nodejs npm && npm install -g serve
+# Install serve for frontend
+RUN npm install -g serve
 
 # Copy frontend build
 COPY --from=frontend-builder /app/frontend/dist /app/frontend-dist
