@@ -3,7 +3,7 @@ services:
     name: placement-backend
     env: java
     plan: free
-    buildCommand: "cd backend && mvn clean package -DskipTests"
+    buildCommand: "bash build.sh"
     startCommand: "cd backend && java -jar target/placement-prep-portal-1.0.0.jar"
     envVars:
       - key: PORT
