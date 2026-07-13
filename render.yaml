@@ -1,20 +1,18 @@
 services:
   - type: web
     name: placement-backend
-    env: java
+    runtime: docker
+    dockerfilePath: ./Dockerfile.backend
     plan: free
-    buildCommand: "bash build.sh"
-    startCommand: "cd backend && java -jar target/placement-prep-portal-1.0.0.jar"
     envVars:
       - key: PORT
         value: 8080
-      - key: JAVA_OPTS
-        value: "-Xmx512m"
 
-  - type: static_site
+  - type: web
     name: placement-frontend
-    buildCommand: "cd frontend && npm install && npm run build"
-    publishPath: frontend/dist
+    runtime: docker
+    dockerfilePath: ./Dockerfile.frontend
+    plan: free
     envVars:
       - key: VITE_API_URL
         fromService:
