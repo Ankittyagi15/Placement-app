@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: placement-backend
+    env: java
+    plan: free
+    buildCommand: "cd backend && mvn clean package -DskipTests"
+    startCommand: "cd backend && java -jar target/placement-prep-portal-1.0.0.jar"
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JAVA_OPTS
+        value: "-Xmx512m"
+
+  - type: static_site
+    name: placement-frontend
+    buildCommand: "cd frontend && npm install && npm run build"
+    publishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: placement-backend
+          property: renderURL
