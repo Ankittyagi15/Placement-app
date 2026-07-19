@@ -15,3 +15,6 @@ services:
     publishPath: frontend/dist
     region: oregon
     plan: free
+    envVars:
+      - key: VITE_API_URL
+        value: https://placement-backend.onrender.com

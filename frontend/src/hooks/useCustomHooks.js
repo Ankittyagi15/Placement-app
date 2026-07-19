@@ -10,7 +10,7 @@ export const useFetch = (fetchFunction) => {
     setError(null);
     try {
       const response = await fetchFunction();
-      setData(response.data);
+      setData(response?.data ?? null);
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
     } finally {

@@ -26,7 +26,10 @@ const MCQPage = () => {
   const difficulties = ['Easy', 'Medium', 'Hard'];
   const itemsPerPage = 5;
 
-  const filteredMCQs = (mcqs || []).filter(mcq => {
+  const mcqsArray = Array.isArray(mcqs) ? mcqs : [];
+  const invalidMCQResponse = mcqs != null && !Array.isArray(mcqs);
+
+  const filteredMCQs = mcqsArray.filter(mcq => {
     const matchesSearch = mcq.question.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = !selectedCategory || mcq.category === selectedCategory;
     const matchesDifficulty = !selectedDifficulty || mcq.difficulty === selectedDifficulty;
@@ -96,7 +99,15 @@ const MCQPage = () => {
           <p>Test your knowledge with our comprehensive MCQ questions</p>
         </div>
 
-        {error && <ErrorMessage message={error} />}
+        {(error || invalidMCQResponse) && (
+          <ErrorMessage
+            message={
+              invalidMCQResponse
+                ? 'Invalid API response received. Check backend URL configuration.'
+                : error
+            }
+          />
+        )}
         {successMessage && (
           <SuccessMessage message={successMessage} />
         )}
