@@ -1,11 +1,10 @@
 package com.placementprep.portal.controller;
 
-import com.placementprep.portal.dto.MCQDTO;
-import com.placementprep.portal.service.MCQService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import com.placementprep.portal.entity.MCQ;
+import com.placementprep.portal.repository.MCQRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -13,57 +12,64 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class MCQController {
 
-    private final MCQService mcqService;
+    private final MCQRepository mcqRepository;
 
-    public MCQController(MCQService mcqService) {
-        this.mcqService = mcqService;
+    public MCQController(MCQRepository mcqRepository) {
+        this.mcqRepository = mcqRepository;
     }
 
     @GetMapping
-    public ResponseEntity<List<MCQDTO>> getAllMCQs() {
-        return ResponseEntity.ok(mcqService.getAllMCQs());
+    public ResponseEntity<List<MCQ>> getAllMCQs() {
+        return ResponseEntity.ok(mcqRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MCQDTO> getMCQById(@PathVariable Long id) {
-        return ResponseEntity.ok(mcqService.getMCQById(id));
+    public ResponseEntity<MCQ> getMCQById(@PathVariable Long id) {
+        return mcqRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<MCQDTO>> getMCQsByCategory(@PathVariable String category) {
-        return ResponseEntity.ok(mcqService.getMCQsByCategory(category));
+    public ResponseEntity<List<MCQ>> getMCQsByCategory(@PathVariable String category) {
+        return ResponseEntity.ok(mcqRepository.findByCategory(category));
     }
 
     @GetMapping("/difficulty/{difficulty}")
-    public ResponseEntity<List<MCQDTO>> getMCQsByDifficulty(@PathVariable String difficulty) {
-        return ResponseEntity.ok(mcqService.getMCQsByDifficulty(difficulty));
+    public ResponseEntity<List<MCQ>> getMCQsByDifficulty(@PathVariable String difficulty) {
+        return ResponseEntity.ok(mcqRepository.findByDifficulty(difficulty));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<MCQDTO>> searchMCQs(@RequestParam String keyword) {
-        return ResponseEntity.ok(mcqService.searchMCQs(keyword));
+    public ResponseEntity<List<MCQ>> searchMCQs(@RequestParam String keyword) {
+        return ResponseEntity.ok(mcqRepository.findByQuestionContainingIgnoreCase(keyword));
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<List<MCQDTO>> filterMCQs(
-            @RequestParam String category,
-            @RequestParam String difficulty) {
-        return ResponseEntity.ok(mcqService.filterMCQs(category, difficulty));
+    public ResponseEntity<List<MCQ>> filterMCQs(@RequestParam String category, @RequestParam String difficulty) {
+        return ResponseEntity.ok(mcqRepository.findByCategoryAndDifficulty(category, difficulty));
     }
 
     @PostMapping
-    public ResponseEntity<MCQDTO> createMCQ(@Valid @RequestBody MCQDTO mcqDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(mcqService.createMCQ(mcqDTO));
+    public ResponseEntity<MCQ> createMCQ(@RequestBody MCQ mcq) {
+        MCQ saved = mcqRepository.save(mcq);
+        return ResponseEntity.status(201).body(saved);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MCQDTO> updateMCQ(@PathVariable Long id, @Valid @RequestBody MCQDTO mcqDTO) {
-        return ResponseEntity.ok(mcqService.updateMCQ(id, mcqDTO));
+    public ResponseEntity<MCQ> updateMCQ(@PathVariable Long id, @RequestBody MCQ mcq) {
+        return mcqRepository.findById(id).map(existing -> {
+            mcq.setId(existing.getId());
+            MCQ updated = mcqRepository.save(mcq);
+            return ResponseEntity.ok(updated);
+        }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMCQ(@PathVariable Long id) {
-        mcqService.deleteMCQ(id);
-        return ResponseEntity.noContent().build();
+        return mcqRepository.findById(id).map(existing -> {
+            mcqRepository.delete(existing);
+            return ResponseEntity.noContent().<Void>build();
+        }).orElse(ResponseEntity.notFound().build());
     }
 }
