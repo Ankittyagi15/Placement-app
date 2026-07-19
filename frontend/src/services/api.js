@@ -1,10 +1,13 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_URL || '';
+const DEFAULT_PROD_API = 'https://placement-backend.onrender.com';
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? DEFAULT_PROD_API : '');
 const API_URL = API_BASE ? `${API_BASE}/api` : '/api';
 
 if (import.meta.env.PROD && !import.meta.env.VITE_API_URL) {
-  console.warn('VITE_API_URL is not set. Frontend will attempt /api relative routes.');
+  console.warn(
+    `VITE_API_URL is not set. Using default production backend URL: ${DEFAULT_PROD_API}`
+  );
 }
 
 const api = axios.create({
