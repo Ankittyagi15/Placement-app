@@ -1,0 +1,4 @@
+/workspaces/Placement-app/backend_min/src/main/java/com/placementprep/backendmin/controller/MCQController.java
+/workspaces/Placement-app/backend_min/src/main/java/com/placementprep/backendmin/repository/MCQRepository.java
+/workspaces/Placement-app/backend_min/src/main/java/com/placementprep/backendmin/PlacementPrepBackendMinApplication.java
+/workspaces/Placement-app/backend_min/src/main/java/com/placementprep/backendmin/entity/MCQ.java

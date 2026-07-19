@@ -1,0 +1,4 @@
+com/placementprep/backendmin/PlacementPrepBackendMinApplication.class
+com/placementprep/backendmin/entity/MCQ.class
+com/placementprep/backendmin/controller/MCQController.class
+com/placementprep/backendmin/repository/MCQRepository.class

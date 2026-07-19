@@ -1,0 +1,3 @@
+INSERT INTO mcqs (id, question, option_a, option_b, option_c, option_d, correct_answer, category, difficulty, explanation) VALUES
+(1, 'What is an Operating System?', 'A program that runs on a computer', 'Software that manages hardware and software resources', 'A type of file system', 'Part of the CPU', 'Software that manages hardware and software resources', 'Operating System', 'Easy', 'An OS is system software that acts as an intermediary between the user and the computer hardware.'),
+(2, 'Which of the following is a real-time operating system?', 'Windows', 'Linux', 'VxWorks', 'macOS', 'VxWorks', 'Operating System', 'Medium', 'VxWorks is a real-time operating system used in embedded systems.');

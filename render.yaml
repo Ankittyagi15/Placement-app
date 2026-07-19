@@ -8,6 +8,15 @@ services:
     region: oregon
     plan: free
 
+  - type: web
+    name: placement-backend-min
+    env: docker
+    branch: main
+    dockerfilePath: backend_min/Dockerfile
+    healthCheckPath: /
+    region: oregon
+    plan: free
+
   - type: static
     name: placement-frontend
     env: static
