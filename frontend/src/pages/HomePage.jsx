@@ -1,112 +1,371 @@
-import { Link } from 'react-router-dom';
-import './HomePage.css';
+import { Link } from "react-router-dom";
+import "./HomePage.css";
+
+const features = [
+  {
+    icon: "💻",
+    title: "Coding Practice",
+    desc: "Solve interview coding questions from Arrays, Strings, Trees, Graphs, DP and many more.",
+  },
+  {
+    icon: "📝",
+    title: "MCQ Practice",
+    desc: "Practice hundreds of MCQs from Java, DBMS, OS, SQL, CN and OOPs.",
+  },
+  {
+    icon: "📈",
+    title: "Track Progress",
+    desc: "Know your strengths and weaknesses with detailed performance analysis.",
+  },
+  {
+    icon: "🎯",
+    title: "Placement Focused",
+    desc: "Questions collected from Cognizant, TCS, Infosys, Wipro, Capgemini and more.",
+  },
+  {
+    icon: "⚡",
+    title: "Instant Results",
+    desc: "Get your score instantly with explanations after submitting the quiz.",
+  },
+  {
+    icon: "🏆",
+    title: "Interview Ready",
+    desc: "Improve speed, confidence and problem-solving for technical interviews.",
+  },
+];
+
+const stats = [
+  { number: "100+", text: "MCQs" },
+  { number: "30+", text: "Coding Problems" },
+  { number: "6", text: "Subjects" },
+  { number: "1000+", text: "Students Ready" },
+];
 
 const HomePage = () => {
   return (
-    <div className="home-page">
-      {/* Hero Section */}
+    <div className="home">
+
+      {/* HERO */}
+
       <section className="hero">
-        <div className="container">
-          <div className="hero-content">
-            <h1>Master Placements with Placement Prep Portal</h1>
-            <p>Practice MCQs, solve coding challenges, and track your progress</p>
+
+        <div className="blob blob1"></div>
+        <div className="blob blob2"></div>
+        <div className="blob blob3"></div>
+
+        <div className="container hero-container">
+
+          <div className="hero-left">
+
+            <span className="badge">
+              🚀 India's Smart Placement Preparation Platform
+            </span>
+
+            <h1>
+              Crack Your
+              <span> Dream Placement </span>
+              With Confidence.
+            </h1>
+
+            <p>
+              Practice company-level MCQs, coding questions,
+              interview preparation and improve your placement
+              performance with one powerful platform.
+            </p>
+
             <div className="hero-buttons">
-              <Link to="/mcqs" className="btn btn-primary btn-lg">
-                Start Practicing
+
+              <Link
+                to="/mcqs"
+                className="btn hero-btn"
+              >
+                Start Practicing →
               </Link>
-              <Link to="/about" className="btn btn-secondary btn-lg">
-                Learn More
+
+              <Link
+                to="/coding"
+                className="btn hero-outline"
+              >
+                Coding Questions
               </Link>
+
             </div>
+
+            <div className="hero-stats">
+
+              <div>
+                <h2>100+</h2>
+                <p>Questions</p>
+              </div>
+
+              <div>
+                <h2>30+</h2>
+                <p>Coding</p>
+              </div>
+
+              <div>
+                <h2>95%</h2>
+                <p>Success</p>
+              </div>
+
+            </div>
+
           </div>
-          <div className="hero-image">
-            <div className="hero-icon">🎯</div>
+
+          <div className="hero-right">
+
+            <div className="circle big"></div>
+            <div className="circle small"></div>
+
+            <div className="floating-card card1">
+              💻 Coding
+            </div>
+
+            <div className="floating-card card2">
+              📝 MCQ
+            </div>
+
+            <div className="floating-card card3">
+              🎯 Interview
+            </div>
+
+            <div className="main-icon">
+              🎓
+            </div>
+
           </div>
+
         </div>
+
       </section>
 
-      {/* Features Section */}
+      {/* FEATURES */}
+
       <section className="features">
+
         <div className="container">
-          <h2>Why Choose Us?</h2>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">📝</div>
-              <h3>Comprehensive MCQs</h3>
-              <p>Hundreds of MCQ questions covering all important topics like Operating Systems, Databases, Java, and more.</p>
-            </div>
 
-            <div className="feature-card">
-              <div className="feature-icon">💻</div>
-              <h3>Coding Challenges</h3>
-              <p>Practice 30+ coding problems on arrays, strings, trees, graphs, and dynamic programming.</p>
-            </div>
+          <h2 className="section-title">
+            Why Students Love This Platform
+          </h2>
 
-            <div className="feature-card">
-              <div className="feature-icon">📊</div>
-              <h3>Track Progress</h3>
-              <p>Monitor your performance with detailed analytics and category-wise performance tracking.</p>
-            </div>
+          <p className="section-subtitle">
+            Everything required to prepare for placements
+            in one place.
+          </p>
 
-            <div className="feature-card">
-              <div className="feature-icon">🎓</div>
-              <h3>Interview Ready</h3>
-              <p>Get prepared for technical interviews with curated questions from top companies.</p>
-            </div>
+          <div className="feature-grid">
 
-            <div className="feature-card">
-              <div className="feature-icon">⚡</div>
-              <h3>Quick Results</h3>
-              <p>Get instant feedback on your quiz attempts with detailed explanations for each answer.</p>
-            </div>
+            {features.map((item, index) => (
 
-            <div className="feature-card">
-              <div className="feature-icon">🔄</div>
-              <h3>Easy Management</h3>
-              <p>Admin panel to easily add, edit, and manage MCQs and coding questions.</p>
-            </div>
+              <div
+                className="feature-card"
+                key={index}
+              >
+
+                <div className="feature-icon">
+                  {item.icon}
+                </div>
+
+                <h3>{item.title}</h3>
+
+                <p>{item.desc}</p>
+
+              </div>
+
+            ))}
+
           </div>
+
         </div>
+
       </section>
 
-      {/* Statistics Section */}
+      {/* STATISTICS */}
+
       <section className="statistics">
+
         <div className="container">
-          <h2>Our Statistics</h2>
-          <div className="stats-container">
-            <div className="stat-box">
-              <div className="stat-number">100+</div>
-              <div className="stat-text">MCQ Questions</div>
-            </div>
 
-            <div className="stat-box">
-              <div className="stat-number">30+</div>
-              <div className="stat-text">Coding Problems</div>
-            </div>
+          <h2 className="section-title white">
+            Platform Statistics
+          </h2>
 
-            <div className="stat-box">
-              <div className="stat-number">6</div>
-              <div className="stat-text">MCQ Categories</div>
-            </div>
+          <div className="stats-grid">
 
-            <div className="stat-box">
-              <div className="stat-number">16</div>
-              <div className="stat-text">Coding Topics</div>
-            </div>
+            {stats.map((item, index) => (
+
+              <div
+                className="stat-card"
+                key={index}
+              >
+
+                <h1>{item.number}</h1>
+
+                <p>{item.text}</p>
+
+              </div>
+
+            ))}
+
           </div>
+
         </div>
+
+      </section>
+            {/* TESTIMONIALS */}
+
+      <section className="testimonials">
+
+        <div className="container">
+
+          <h2 className="section-title">
+            What Students Say
+          </h2>
+
+          <div className="testimonial-grid">
+
+            <div className="testimonial-card">
+
+              <p>
+                "This platform helped me practice Java and SQL before my
+                placement drive. The interface is simple and the questions
+                are really useful."
+              </p>
+
+              <h4>⭐⭐⭐⭐⭐</h4>
+
+              <span>Computer Science Student</span>
+
+            </div>
+
+            <div className="testimonial-card">
+
+              <p>
+                "The coding section improved my confidence for interviews.
+                Highly recommended for placement preparation."
+              </p>
+
+              <h4>⭐⭐⭐⭐⭐</h4>
+
+              <span>Final Year Student</span>
+
+            </div>
+
+            <div className="testimonial-card">
+
+              <p>
+                "MCQs with instant results helped me identify weak topics.
+                The UI is clean and easy to use."
+              </p>
+
+              <h4>⭐⭐⭐⭐⭐</h4>
+
+              <span>Placement Aspirant</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </section>
 
-      {/* CTA Section */}
+      {/* CALL TO ACTION */}
+
       <section className="cta">
+
         <div className="container">
-          <h2>Ready to Ace Your Placements?</h2>
-          <p>Start practicing today and build confidence for your interviews</p>
-          <Link to="/mcqs" className="btn btn-primary btn-lg">
-            Begin Your Journey
+
+          <h2>
+            Ready To Start Your Placement Journey?
+          </h2>
+
+          <p>
+            Practice today and increase your chances of getting placed in
+            your dream company.
+          </p>
+
+          <Link
+            to="/mcqs"
+            className="btn cta-btn"
+          >
+            Start Practicing
           </Link>
+
         </div>
+
       </section>
+
+      {/* FOOTER INFO */}
+
+      <section className="footer-info">
+
+        <div className="container footer-grid">
+
+          <div>
+
+            <h3>Placement Prep Portal</h3>
+
+            <p>
+              A modern placement preparation platform for students to
+              practice MCQs, coding questions and interview preparation.
+            </p>
+
+          </div>
+
+          <div>
+
+            <h3>Subjects</h3>
+
+            <ul>
+
+              <li>Java</li>
+
+              <li>DBMS</li>
+
+              <li>Operating System</li>
+
+              <li>Computer Networks</li>
+
+              <li>SQL</li>
+
+              <li>OOPs</li>
+
+            </ul>
+
+          </div>
+
+          <div>
+
+            <h3>Quick Links</h3>
+
+            <ul>
+
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+
+              <li>
+                <Link to="/mcqs">MCQs</Link>
+              </li>
+
+              <li>
+                <Link to="/coding">Coding</Link>
+              </li>
+
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </section>
+
     </div>
   );
 };
