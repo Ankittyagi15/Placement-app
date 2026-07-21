@@ -29,9 +29,7 @@ const Navbar = () => {
           <li className={`nav-item ${isActive('/results')}`}>
             <Link to="/results" className="nav-link">Results</Link>
           </li>
-          <li className={`nav-item ${isActive('/admin')}`}>
-            <Link to="/admin" className="nav-link">Admin</Link>
-          </li>
+          
           <li className={`nav-item ${isActive('/about')}`}>
             <Link to="/about" className="nav-link">About</Link>
           </li>
