@@ -110,7 +110,7 @@ const CodingPage = () => {
         <div className="stats-card">
 
           <div className="stat-box">
-            <h2>{questions.length}</h2>
+            <h2>{questions?.length || 0}</h2>
             <p>Total Questions</p>
           </div>
 
