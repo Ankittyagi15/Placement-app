@@ -55,7 +55,7 @@ const MCQPage = () => {
     }
 
     let correct = 0;
-    paginatedMCQs.forEach(mcq => {
+    filteredMCQs.forEach(mcq => {
     const selectedOptionText = {
         A: mcq.optionA,
         B: mcq.optionB,
@@ -68,7 +68,7 @@ const MCQPage = () => {
     }
 });
 
-    const total = paginatedMCQs.length;
+    const total = filteredMCQs.length;
     const wrong = total - correct;
     const percentage = (correct / total) * 100;
 
