@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage';
 import MCQPage from './pages/MCQPage';
 import CodingPage from './pages/CodingPage';
 import ResultsPage from './pages/ResultsPage';
-import AdminPage from './pages/AdminPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
@@ -21,7 +20,6 @@ function App() {
             <Route path="/mcqs" element={<MCQPage />} />
             <Route path="/coding" element={<CodingPage />} />
             <Route path="/results" element={<ResultsPage />} />
-            <Route path="/admin" element={<AdminPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
