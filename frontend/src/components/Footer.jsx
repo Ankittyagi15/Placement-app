@@ -35,10 +35,7 @@ const Footer = () => {
           <div className="footer-section">
             <h4>Connect</h4>
             <ul>
-              <li><a href="#twitter">Twitter</a></li>
-              <li><a href="#linkedin">LinkedIn</a></li>
-              <li><a href="#github">GitHub</a></li>
-              <li><a href="#email">Email</a></li>
+              
             </ul>
           </div>
         </div>
