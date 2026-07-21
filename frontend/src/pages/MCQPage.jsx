@@ -49,8 +49,9 @@ const MCQPage = () => {
 
   const handleSubmit = async () => {
     if (Object.keys(selectedAnswers).length < paginatedMCQs.length) {
-      alert('Please answer all questions before submitting!');
-      return;
+  alert('Please answer all questions before submitting!');
+  return;
+}
     }
 
     let correct = 0;
